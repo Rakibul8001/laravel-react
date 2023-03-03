@@ -27,6 +27,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
         "@ttskch/select2-bootstrap4-theme": "^1.4.0",
+        "date-fns": "^2.29.3",
         "jquery.easing": "^1.4.1",
         "react-dropzone": "^14.2.3",
         "react-tag-input-component": "^2.0.2",

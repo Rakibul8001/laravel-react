@@ -46,6 +46,8 @@ const CreateProduct = () => {
         product_variant_prices: []
     });
 
+    console.log(formData);
+
     const onDrop = useCallback(acceptedFiles => {
         const images = acceptedFiles.map(file =>
             Object.assign(file, {
@@ -190,7 +192,7 @@ const CreateProduct = () => {
         };
 
         axios
-            .post("/product", product)
+            .post("/api/product/create", product)
             .then(response => {
                 console.log(response.data);
             })

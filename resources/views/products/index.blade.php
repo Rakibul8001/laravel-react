@@ -6,9 +6,10 @@
         <h1 class="h3 mb-0 text-gray-800">Products</h1>
     </div>
 
-
+    
     <div class="card">
-        <form action="" method="get" class="card-header">
+        <div id="productList"></div>
+        {{-- <form action="" method="get" class="card-header">
             <div class="form-row justify-content-between">
                 <div class="col-md-2">
                     <input type="text" name="title" placeholder="Product Title" class="form-control">
@@ -94,7 +95,8 @@
 
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
+
 
 @endsection

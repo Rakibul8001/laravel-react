@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Variant;
 use App\Models\ProductVariant;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,11 +18,12 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function productVariants()
-    {
-        return $this->hasMany(ProductVariant::class);
-    }
 
+     //with children of children correct
+    public function variants()
+    {
+        return $this->belongsToMany(Variant::class, 'product_variants','product_id','variant_id')->with('product_variants');
+    }
 
 
 }

@@ -7,9 +7,8 @@ import Edit from "./Edit";
 
 function ProductList() {
     const [products,setProducts]=useState([]);
-    // const [filteredData,setFilteredData] = useState([]);
     const [loading,setLoading]= useState(true);
-    console.log(products);
+    // console.log(products);
 
     const fetchProducts = useCallback(async()=>{
         setLoading(true);
@@ -32,9 +31,7 @@ function ProductList() {
     const [price_from,setPriceFrom] = useState(0);
     const [price_to,setPriceTo] = useState(10000);
 
-    console.log(price_from);
-    console.log(price_to);
-
+    //submit form for filtering
     const onSubmitFilter = async(e)=>{
         e.preventDefault();
         let subscribed = true;
@@ -144,12 +141,12 @@ function ProductList() {
                         </dl>
                         </dd>
                     </dl>
-                    {/* <button
+                    <button
                         onClick="$('#variant').toggleClass('h-auto')"
                         className="btn btn-sm btn-link"
                     >
                         Show more
-                    </button> */}
+                    </button>
                     </td>
                     <td>
                     <div className="btn-group btn-group-sm">
@@ -178,11 +175,6 @@ function ProductList() {
             <div className="col-md-2"></div>
             </div>
         </div>
-
-
-        {/* <Routes>
-            <Route path="/product/:id/editss" element={<Edit /> } />
-        </Routes> */}
         
         </Fragment>
   )
@@ -194,8 +186,6 @@ const element = document.getElementById("productList");
 
 if (element) {
     ReactDOM.render(
-    // <BrowserRouter>
         <ProductList />
-    // </BrowserRouter>
     , element);
 }

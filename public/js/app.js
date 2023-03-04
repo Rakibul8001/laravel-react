@@ -105069,6 +105069,7 @@ var CreateProduct = function CreateProduct() {
     };
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/product/create", product).then(function (response) {
       console.log(response.data);
+      window.location.reload();
     })["catch"](function (error) {
       console.log(error);
     });
@@ -105274,12 +105275,12 @@ if (element) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_dropzone__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dropzone */ "./node_modules/react-dropzone/dist/es/index.js");
 /* harmony import */ var react_tag_input_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-tag-input-component */ "./node_modules/react-tag-input-component/dist/esm/index.js");
 
@@ -105354,12 +105355,12 @@ var Edit = function Edit() {
   var splitPath = urlpath.split('/');
   var id = splitPath[2]; // console.log(id);
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       variants = _useState2[0],
       setVariants = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     product_name: "",
     product_sku: "",
     description: "",
@@ -105372,7 +105373,7 @@ var Edit = function Edit() {
       setFormData = _useState4[1];
 
   console.log(formData);
-  var onDrop = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (acceptedFiles) {
+  var onDrop = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])(function (acceptedFiles) {
     var images = acceptedFiles.map(function (file) {
       return Object.assign(file, {
         preview: URL.createObjectURL(file)
@@ -105513,8 +105514,8 @@ var Edit = function Edit() {
     });
   };
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/variants").then(function (response) {
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/variants").then(function (response) {
       setFormData(function (prevState) {
         return _objectSpread(_objectSpread({}, prevState), {}, {
           product_variant: [{
@@ -105527,16 +105528,16 @@ var Edit = function Edit() {
     });
   }, []); // check product_variant_price when product_variant changed
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
     checkVariant();
   }, [formData.product_variant]);
   var thumbs = formData.images.map(function (file) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       style: thumb,
       key: file.name
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       style: thumbInner
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
       src: file.preview,
       style: img // Revoke data uri after image is loaded
       ,
@@ -105544,57 +105545,47 @@ var Edit = function Edit() {
         URL.revokeObjectURL(file.preview);
       }
     })));
-  }); //fetch product info
-  // useEffect(()=>{
-  //   (
-  //     const async()=>{
-  //       await axios.get(`/api/product/${id}`)
-  //       .then((res)=>{
-  //         console.log(res.data);
-  //         setFormData(prevState => ({
-  //           ...prevState,
-  //           title:res.data?.product?.title
-  //       }));
-  //       })
-  //       .catch((err)=>{
-  //       });
-  //     }
-  //   )();
-  // },[id]);
+  });
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
-    title: "",
-    sku: "",
-    description: ""
-  }),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(""),
       _useState6 = _slicedToArray(_useState5, 2),
-      product = _useState6[0],
-      setProduct = _useState6[1];
+      title = _useState6[0],
+      setTitle = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(""),
       _useState8 = _slicedToArray(_useState7, 2),
-      title = _useState8[0],
-      setTitle = _useState8[1];
+      sku = _useState8[0],
+      setSku = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(""),
       _useState10 = _slicedToArray(_useState9, 2),
-      sku = _useState10[0],
-      setSku = _useState10[1];
+      description = _useState10[0],
+      setDescription = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      description = _useState12[0],
-      setDescription = _useState12[1];
+      variantsArr = _useState12[0],
+      setVariantsArr = _useState12[1];
 
-  console.log(title);
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    variantsArr.map(function (option, index) {
+      setFormData(function (prevState) {
+        return {
+          product_variant: [{
+            option: option.variant_id,
+            tags: _toConsumableArray(formData.product_variant[index].tags.push("".concat(option.title)))
+          }]
+        };
+      });
+    });
+  }, [variantsArr]);
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(true),
       _useState14 = _slicedToArray(_useState13, 2),
       loading = _useState14[0],
       setLoading = _useState14[1];
 
-  console.log(title);
-  var fetchProductData = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+  var fetchProductData = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
     var isSubscribe;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
@@ -105603,13 +105594,15 @@ var Edit = function Edit() {
             isSubscribe = true;
             setLoading(true);
             _context.next = 4;
-            return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/product/".concat(id)).then(function (res) {
+            return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/product/".concat(id)).then(function (res) {
               if (isSubscribe) {
-                var _res$data, _res$data$product, _res$data2, _res$data2$product, _res$data3, _res$data3$product;
+                var _res$data, _res$data2, _res$data2$product, _res$data3, _res$data3$product, _res$data4, _res$data4$product;
 
-                setTitle((_res$data = res.data) === null || _res$data === void 0 ? void 0 : (_res$data$product = _res$data.product) === null || _res$data$product === void 0 ? void 0 : _res$data$product.title);
-                setSku((_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : (_res$data2$product = _res$data2.product) === null || _res$data2$product === void 0 ? void 0 : _res$data2$product.sku);
-                setDescription((_res$data3 = res.data) === null || _res$data3 === void 0 ? void 0 : (_res$data3$product = _res$data3.product) === null || _res$data3$product === void 0 ? void 0 : _res$data3$product.description);
+                var result = (_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.variants;
+                variantsArr.push.apply(variantsArr, _toConsumableArray(result));
+                setTitle((_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : (_res$data2$product = _res$data2.product) === null || _res$data2$product === void 0 ? void 0 : _res$data2$product.title);
+                setSku((_res$data3 = res.data) === null || _res$data3 === void 0 ? void 0 : (_res$data3$product = _res$data3.product) === null || _res$data3$product === void 0 ? void 0 : _res$data3$product.sku);
+                setDescription((_res$data4 = res.data) === null || _res$data4 === void 0 ? void 0 : (_res$data4$product = _res$data4.product) === null || _res$data4$product === void 0 ? void 0 : _res$data4$product.description);
                 setLoading(false);
               }
             })["catch"](function (err) {
@@ -105628,7 +105621,7 @@ var Edit = function Edit() {
       }
     }, _callee);
   })), [id]);
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
     fetchProductData();
   }, [fetchProductData]); //product update form
 
@@ -105645,16 +105638,14 @@ var Edit = function Edit() {
                 description: description
               };
               _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/product/update/".concat(id), _objectSpread({}, product)).then(function (response) {
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/product/update/".concat(id), _objectSpread({}, product)).then(function (response) {
                 console.log(response.data);
+                window.location.reload();
               })["catch"](function (error) {
                 console.log(error);
               });
 
             case 3:
-              console.log(product);
-
-            case 4:
             case "end":
               return _context2.stop();
           }
@@ -105667,19 +105658,19 @@ var Edit = function Edit() {
     };
   }();
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("section", null, !loading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("section", null, !loading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "col-md-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "card shadow mb-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "card-body"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", {
     htmlFor: ""
-  }, "Product Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, "Product Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
     type: "text",
     placeholder: "Product Name",
     name: "title",
@@ -105688,11 +105679,11 @@ var Edit = function Edit() {
       setTitle(e.target.value);
     },
     className: "form-control"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", {
     htmlFor: ""
-  }, "Product SKU"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, "Product SKU"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
     type: "text",
     placeholder: "Product Name",
     className: "form-control",
@@ -105701,11 +105692,11 @@ var Edit = function Edit() {
     onChange: function onChange(e) {
       setSku(e.target.value);
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", {
     htmlFor: ""
-  }, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+  }, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("textarea", {
     id: "",
     cols: "30",
     rows: "4",
@@ -105715,55 +105706,56 @@ var Edit = function Edit() {
     onChange: function onChange(e) {
       setDescription(e.target.value);
     }
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "card shadow mb-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "card-header py-3 d-flex flex-row align-items-center justify-content-between"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h6", {
     className: "m-0 font-weight-bold text-primary"
-  }, "Media")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", _extends({
+  }, "Media")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", _extends({
     className: "card-body border"
   }, getRootProps({
     className: "dropzone"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", _extends({
     className: "p-5"
-  }, getInputProps())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+  }, getInputProps())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", {
     className: "p-5 text-center m-3 border"
-  }, "Drop files here to upload")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("aside", {
+  }, "Drop files here to upload")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("aside", {
     style: thumbsContainer
-  }, thumbs))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, thumbs))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "col-md-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "card shadow mb-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "card-header py-3 d-flex flex-row align-items-center justify-content-between"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h6", {
     className: "m-0 font-weight-bold text-primary"
-  }, "Variants")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Variants")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "card-body"
   }, formData.product_variant.map(function (item, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: "col-md-4"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", {
       htmlFor: ""
-    }, "Option"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    }, "Option"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("select", {
       className: "form-control",
+      selected: 0,
       onChange: function onChange(e) {
         return handleVariantChange(index, e.target.value);
       }
     }, variants.map(function (variant) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("option", {
         value: variant.id
       }, variant.title);
-    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: "col-md-8"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", {
       className: "float-right text-primary",
       style: {
         cursor: "pointer"
@@ -105771,28 +105763,28 @@ var Edit = function Edit() {
       onClick: function onClick() {
         return handleVariantRemove(index);
       }
-    }, "Remove"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_tag_input_component__WEBPACK_IMPORTED_MODULE_5__["TagsInput"], {
+    }, "Remove"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", null, "."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_tag_input_component__WEBPACK_IMPORTED_MODULE_5__["TagsInput"], {
       value: item.tags,
       onChange: function onChange(_tags) {
         return handleVariantTagAdd(index, _tags);
       },
       className: "form-control"
     }))));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "card-footer"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
     className: "btn btn-primary",
     onClick: newVariant
-  }, "Add another option")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Add another option")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "card-header text-uppercase"
-  }, "Preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "card-body"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "table-responsive"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("table", {
     className: "table"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "Variant"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "Stock"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, formData.product_variant_prices.map(function (variant_price, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, variant_price.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", null, "Variant"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", null, "Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", null, "Stock"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("tbody", null, formData.product_variant_prices.map(function (variant_price, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", null, variant_price.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
       type: "text",
       className: "form-control",
       value: variant_price.price,
@@ -105801,7 +105793,7 @@ var Edit = function Edit() {
           price: e.target.value
         }));
       }
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
       type: "text",
       className: "form-control",
       value: variant_price.stock,
@@ -105811,11 +105803,11 @@ var Edit = function Edit() {
         }));
       }
     })));
-  })))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  })))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
     type: "submit",
     className: "btn btn-lg btn-primary",
     onClick: saveProduct
-  }, "Save"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }, "Save"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
     type: "button",
     className: "btn btn-secondary btn-lg"
   }, "Cancel")));
@@ -105824,7 +105816,7 @@ var Edit = function Edit() {
 /* harmony default export */ __webpack_exports__["default"] = (Edit);
 
 if (document.getElementById('app')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Edit, null), document.getElementById('app'));
+  react_dom__WEBPACK_IMPORTED_MODULE_3___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Edit, null), document.getElementById('app'));
 }
 
 /***/ }),
@@ -105878,15 +105870,14 @@ function ProductList() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       products = _useState2[0],
-      setProducts = _useState2[1]; // const [filteredData,setFilteredData] = useState([]);
-
+      setProducts = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState4 = _slicedToArray(_useState3, 2),
       loading = _useState4[0],
-      setLoading = _useState4[1];
+      setLoading = _useState4[1]; // console.log(products);
 
-  console.log(products);
+
   var fetchProducts = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
@@ -105932,10 +105923,8 @@ function ProductList() {
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(10000),
       _useState12 = _slicedToArray(_useState11, 2),
       price_to = _useState12[0],
-      setPriceTo = _useState12[1];
+      setPriceTo = _useState12[1]; //submit form for filtering
 
-  console.log(price_from);
-  console.log(price_to);
 
   var onSubmitFilter = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
@@ -106069,7 +106058,10 @@ function ProductList() {
       className: "col-sm-4 pb-0"
     }, "Price : ", "{", "{", " number_format(200,2) ", "}", "}"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dd", {
       className: "col-sm-8 pb-0"
-    }, "InStock : ", "{", "{", " number_format(50,2) ", "}", "}"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, "InStock : ", "{", "{", " number_format(50,2) ", "}", "}")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      onClick: "$('#variant').toggleClass('h-auto')",
+      className: "btn btn-sm btn-link"
+    }, "Show more")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "btn-group btn-group-sm"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
       href: "/product/".concat(product === null || product === void 0 ? void 0 : product.id, "/edit"),
@@ -106090,11 +106082,7 @@ function ProductList() {
 var element = document.getElementById("productList");
 
 if (element) {
-  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(
-  /*#__PURE__*/
-  // <BrowserRouter>
-  react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(ProductList, null) // </BrowserRouter>
-  , element);
+  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(ProductList, null), element);
 }
 
 /***/ }),

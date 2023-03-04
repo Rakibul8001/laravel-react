@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Exception;
 use App\Models\Product;
+use App\Models\Variant;
 use Illuminate\Http\Request;
 use App\Models\ProductVariant;
 use Illuminate\Support\Facades\DB;
@@ -76,18 +77,22 @@ class ProductController extends Controller
                             $variantsArr[]=array(
                                 'variant'=> $tag,
                                 'variant_id'=>$variant['option'],
-                                'product_id'=>$product->id
+                                'product_id'=>$product->id,
+                                'created_at'=>date('Y-m-d H:i:s'),
+                                'updated_at'=>date('Y-m-d H:i:s'),
                             );
                         }
                     }
                 }
             }
 
-            // // dd($variantsArr);
-
             if(count($variantsArr) > 0){
                 DB::table('product_variants')->insert($variantsArr);
             }
+
+
+            $attrValue = $product->with('variants')->get();
+            var_dump($attrValue);
 
             //store product_variant_prices
 
@@ -100,11 +105,10 @@ class ProductController extends Controller
             $attributes_idsArr = [];
 
             foreach($attributes_ids as $newId){
-                // dd($newId->variant_id);
                 $attributes_idsArr[]=$newId->variant_id;
             }
 
-            // $product_variants = ProductVariant::where('variant_id',$attributes_idsArr)->get();
+
             $product_variants = DB::table('product_variants')
                 ->where('variant_id',$attributes_idsArr[0])
                 ->where('product_id',$product->id)
@@ -112,9 +116,9 @@ class ProductController extends Controller
 
 
             $choiceArr=[];
-
+            //collect data from product_variants for each variant and multiple attributes
             foreach($product_variants as $key=>$choiceOne){
-                // dd($choiceOne);
+
                 if(count($attributes_idsArr)>1){
                     $attributes = DB::table('product_variants')->where('product_id',$product->id)
                         ->where('variant_id',$attributes_idsArr[1])
@@ -169,7 +173,7 @@ class ProductController extends Controller
  
             }
 
-            DB::table('product_variant_prices')->insert($choiceArr); 
+            DB::table('product_variant_prices')->insert($choiceArr); //inserting product_variant_prices
 
             return response()->json([
                 'result'=>'success',
@@ -188,7 +192,7 @@ class ProductController extends Controller
 
     //product update
     public function update(Request $request){
-        $product = Product::find($request->id);
+        $product = Product::where('id',$request->id)->first();
         
         $product->title = $request->title;
         $product->sku = $request->sku;
@@ -201,13 +205,43 @@ class ProductController extends Controller
         ]);
     }
 
-    //Single product info
+    //Single product info and variants , options, tags
     public function details(Request $request){
         $product = DB::table('products')->where('id',$request->id)->first();
 
+        $product_variants_ids = DB::table('product_variants')
+                ->select('variant_id')
+                ->where('product_variants.product_id',$request->id)
+                ->join('variants', 'product_variants.variant_id', '=', 'variants.id')
+                ->groupBy('variant_id')
+                ->get();
+
+        $variantArr=[];
+        $attributes=[];
+
+        foreach($product_variants_ids as $key=>$value){
+            $variant = DB::table('variants')->where('id','=',$value->variant_id)->first();
+
+            $variantArr[]=array(
+                'variant_id'=>$variant->id,
+                'title'=>$variant->title,
+            );
+
+            $attr = DB::table('product_variants')->select('id','variant')
+                ->where('product_id',$product->id)
+                ->where('variant_id',$variant->id)
+                ->get();
+            $attributes[]=$attr;
+
+        }
+        
+
         return response()->json([
             'result'=>'success',
-            'product'=>$product
+            'product'=>$product,
+            'product_variants_ids'=>$product_variants_ids,
+            'variants'=> $variantArr,
+            'attributes'=> $attributes
         ]);
     }
 

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback, Fragment } from "react";
-import ReactDOM from "react-dom";
 import axios from "axios";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { useDropzone } from "react-dropzone";
 import { TagsInput } from "react-tag-input-component";
 
@@ -223,44 +223,36 @@ const Edit = () => {
         </div>
     ));
 
-    //fetch product info
-    // useEffect(()=>{
-    //   (
-    //     const async()=>{
-    //       await axios.get(`/api/product/${id}`)
-    //       .then((res)=>{
-    //         console.log(res.data);
-    //         setFormData(prevState => ({
-    //           ...prevState,
-    //           title:res.data?.product?.title
-    //       }));
-    //       })
-    //       .catch((err)=>{
 
-    //       });
-    //     }
-    //   )();
-    // },[id]);
+    const [title,setTitle]=useState("");
+    const [sku,setSku]=useState("");
+    const [description,setDescription]=useState("");
+    const [variantsArr,setVariantsArr]=useState([]);
 
-const [product,setProduct]=useState({
-  title:"",
-  sku:"",
-  description:""
-});
-const [title,setTitle]=useState("");
-const [sku,setSku]=useState("");
-const [description,setDescription]=useState("");
-console.log(title);
+    useEffect(()=>{
+        variantsArr.map((option,index)=>{
+            setFormData(prevState => ({
+                product_variant: [
+                    {
+                        option: option.variant_id,
+                        tags:[...formData.product_variant[index].tags.push(`${option.title}`)]
+                    }
+                ]
+            }));
+        })
+    },[variantsArr])
 
-const [loading,setLoading] = useState(true);
-console.log(title);
+    const [loading,setLoading] = useState(true);
+
     const fetchProductData=useCallback(async()=>{
       let isSubscribe = true;
       setLoading(true);
       await axios.get(`/api/product/${id}`)
       .then((res)=>{
         if(isSubscribe){
-  
+            let result = res.data?.variants;
+            variantsArr.push(...result);
+   
           setTitle(res.data?.product?.title);
           setSku(res.data?.product?.sku);
           setDescription(res.data?.product?.description);
@@ -294,12 +286,13 @@ console.log(title);
           .post(`/api/product/update/${id}`, {...product})
           .then(response => {
               console.log(response.data);
+              window.location.reload();
           })
           .catch(error => {
               console.log(error);
           });
 
-      console.log(product);
+    //   console.log(product);
   };
 
     return (
@@ -385,6 +378,7 @@ console.log(title);
                                             <label htmlFor="">Option</label>
                                             <select
                                                 className="form-control"
+                                                selected={0}
                                                 onChange={e =>
                                                     handleVariantChange(
                                                         index,

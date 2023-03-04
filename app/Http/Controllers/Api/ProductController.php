@@ -14,7 +14,6 @@ class ProductController extends Controller
     //Show product list
     public function index(){
         $products = DB::table('products')->get();
-        // $products = Product::all(;
 
         return response()->json([
             'result'=>'success',
@@ -185,6 +184,31 @@ class ProductController extends Controller
             ]);
         }
 
+    }
+
+    //product update
+    public function update(Request $request){
+        $product = Product::find($request->id);
+        
+        $product->title = $request->title;
+        $product->sku = $request->sku;
+        $product->description = $request->description;
+        $product->save();
+
+        return response()->json([
+            'result'=>'success',
+            'product'=>$product
+        ]);
+    }
+
+    //Single product info
+    public function details(Request $request){
+        $product = DB::table('products')->where('id',$request->id)->first();
+
+        return response()->json([
+            'result'=>'success',
+            'product'=>$product
+        ]);
     }
 
 

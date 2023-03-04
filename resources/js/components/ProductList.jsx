@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback,Fragment } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import { format } from 'date-fns';
+import { BrowserRouter, Routes, Route,Link } from "react-router-dom";
+import Edit from "./Edit";
 
 function ProductList() {
     const [products,setProducts]=useState([]);
@@ -152,11 +154,12 @@ function ProductList() {
                     <td>
                     <div className="btn-group btn-group-sm">
                         <a
-                        href="{{ route('product.edit', 1) }}"
+                        href={`/product/${product?.id}/edit`}
                         className="btn btn-success"
                         >
                         Edit
                         </a>
+                    
                     </div>
                     </td>
                 </tr>
@@ -175,6 +178,11 @@ function ProductList() {
             <div className="col-md-2"></div>
             </div>
         </div>
+
+
+        {/* <Routes>
+            <Route path="/product/:id/editss" element={<Edit /> } />
+        </Routes> */}
         
         </Fragment>
   )
@@ -185,5 +193,9 @@ export default ProductList;
 const element = document.getElementById("productList");
 
 if (element) {
-    ReactDOM.render(<ProductList />, element);
+    ReactDOM.render(
+    // <BrowserRouter>
+        <ProductList />
+    // </BrowserRouter>
+    , element);
 }

@@ -22,5 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/products', 'Api\ProductController@index');
 Route::post('/products/filter', 'Api\ProductController@filter');
 Route::post('/product/create', 'Api\ProductController@store');
+Route::post('/product/update/{id}', 'Api\ProductController@update');
+Route::get('/product/{id}','Api\ProductController@details');
 
 Route::get('/variants', 'Api\VariantController@index');

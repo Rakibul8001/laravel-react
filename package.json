@@ -30,6 +30,8 @@
         "date-fns": "^2.29.3",
         "jquery.easing": "^1.4.1",
         "react-dropzone": "^14.2.3",
+        "react-js-pagination": "^3.0.3",
+        "react-router-dom": "^6.8.2",
         "react-tag-input-component": "^2.0.2",
         "select2": "^4.0.13"
     }
